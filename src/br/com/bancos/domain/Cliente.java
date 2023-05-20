@@ -1,9 +1,10 @@
-package br.com.bancos;
+package br.com.bancos.domain;
 
-import java.util.Scanner;
+import java.sql.Date;
 
 public class Cliente {
 
+    private long id;
     private String nome;
     private String sobrenome;
     private String endereço;
@@ -14,11 +15,52 @@ public class Cliente {
     private String documento;
     private float rendaBruta;
     private ContaCorrente contaCorrente;
-
+    private final int anoAtual = 2023;
     boolean morto;
+
+    public Cliente() {
+
+    }
+
+    public Cliente(String nome, String sobrenome, String endereço, int anoAniversario, int mesAniversario,
+            int diaAniversario, String sexo, String documento, float rendaBruta) {
+
+        this.rendaBruta = rendaBruta;
+        this.contaCorrente = new ContaCorrente();
+        this.contaCorrente.cadastrarLimite(rendaBruta);
+
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.endereço = endereço;
+        this.anoAniversario = anoAniversario;
+        this.mesAniversario = mesAniversario;
+        this.diaAniversario = diaAniversario;
+        this.sexo = sexo;
+        this.documento = documento;
+        this.morto = false;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
 
     public void setAnoAniversario(int anoAniversario) {
         this.anoAniversario = anoAniversario;
+    }
+
+    public boolean setNascimento(int ano, int mes, int dia) {
+        setAnoAniversario(ano);
+        setDiaAniversario(dia);
+        setMesAniversario(mes);
+        return true;
+    }
+
+    public boolean validarIdade() {
+        return (anoAtual - anoAniversario) >= 18;
     }
 
     public void setDocumento(String documento) {
@@ -26,9 +68,7 @@ public class Cliente {
     }
 
     public void setNome(String nome) {
-
         this.nome = nome;
-
     }
 
     public void setSexo(String sexo) {
@@ -108,9 +148,7 @@ public class Cliente {
     }
 
     public boolean sacar(int valorSaque) {
-
         return contaCorrente.sacar(valorSaque);
-
     }
 
     public boolean depositar() {

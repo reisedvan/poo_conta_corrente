@@ -1,40 +1,37 @@
-package br.com.bancos;
+package br.com.bancos.domain;
 
 public class ContaCorrente {
 
     float saldo;
-    float credito;
-    float debito;
     float limite;
 
-    public float verificarSaldo() {
+    public ContaCorrente() {
+        this.saldo = 0;
+        this.limite = 0;
+    }
 
+    public float verificarSaldo() {
         return saldo;
     }
 
     public boolean cadastrarLimite(float rendaBruta) {
-
         if (rendaBruta <= 0) {
             return false;
         }
-
         limite = (float) (rendaBruta * 0.30);
         return true;
 
     }
 
     public float verificarLimite() {
-
         return limite;
     }
 
     public boolean sacar(float valorSaque) {
-        if (valorSaque <= saldo) {
+        if (valorSaque>0 && valorSaque <= saldo) {
             saldo = saldo - valorSaque;
             return true;
-
         }
-
         return false;
     }
 
@@ -43,7 +40,6 @@ public class ContaCorrente {
             saldo = saldo + valorDeposito;
             return true;
         }
-
         return false;
 
     }

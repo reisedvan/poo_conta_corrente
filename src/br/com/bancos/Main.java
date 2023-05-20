@@ -1,117 +1,124 @@
 package br.com.bancos;
 
-import java.util.Scanner;
+import br.com.bancos.domain.Cliente;
+import br.com.bancos.service.ClienteService;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
-    Scanner entrada = new Scanner(System.in);
-    ContaCorrente gestaoContas = new ContaCorrente();
-    int opcao;
+    private static ClienteService clienteService = new ClienteService();
 
     public static void main(String[] args) {
+        String nome = "";
+        
+        
+        Cliente cliente = new Cliente(nome, "Reis", "Rua a, num 2", 1999, 12, 13, "M", "000.000.000-00", 2);
+       
+        clienteService.cadastrarCliente(cliente);
 
-        menu();
-
+        clienteService.listarClientes();
     }
 
-    public static void menu() {
-        Scanner entrada = new Scanner(System.in);
-        ContaCorrente gestaoContas = new ContaCorrente();
-
-        int opcao;
-        int novaOpcao;
-        int cpf;
-        int aceite;
-        System.out.println("o você já é cliente ?\n 1-Sim\n 2-Não ");
-        opcao = entrada.nextInt();
-
-        switch (opcao) {
-
-            case 1:
-                System.out.println(" O que deja fazer?\n "
-                        + "1- Sacar\n "
-                        + "2- depositar\n "
-                        + "3- consultar saldo\n "
-                        + "4- consultar limite");
-                novaOpcao = entrada.nextInt();
-
-                switch (novaOpcao) {
-
-                    case 1:
-
-                        System.out.println(" Informe seu CPF ?");
-                        cpf = entrada.nextInt();
-                        if (gestaoContas.ConsularCpf(cpf) != 0) {
-                            System.out.println(" Qual valor você deseja sacar ?");
-                            float valorSaque = entrada.nextFloat();
-                            gestaoContas.sacar(valorSaque);
-                        } else {
-                            System.out.println("Não foi possivel verificar seu Cpf,"
-                                    + "procure uma agencia");
-                            menu();
-                        }
-
-                        break;
-
-                    case 2:
-
-                        System.out.println(" Informe seu CPF ?");
-                        cpf = entrada.nextInt();
-                        if (gestaoContas.ConsularCpf(cpf) != 0) {
-                            System.out.println(" Qual valor você deseja depositar?");
-                            float valorDeposito = entrada.nextFloat();
-                            gestaoContas.creditar(valorDeposito);
-                        } else {
-                            System.out.println("Não foi possivel verificar seu Cpf,"
-                                    + "procure uma agencia");
-                            menu();
-                        }
-                        break;
-
-                    case 3:
-                        System.out.println(" Informe seu CPF ?");
-                        cpf = entrada.nextInt();
-                        if (gestaoContas.ConsularCpf(cpf) != 0) {
-                            gestaoContas.verificarSaldo();
-                        } else {
-                            System.out.println("Não foi possivel verificar seu Cpf,"
-                                    + "procure uma agencia");
-                            menu();
-                        }
-                    case 4:
-                        System.out.println(" Informe seu CPF ?");
-                        cpf = entrada.nextInt();
-                        if (gestaoContas.ConsularCpf(cpf) != 0) {
-                            gestaoContas.verificarLimite();
-                        } else {
-                            System.out.println("Não foi possivel verificar seu Cpf,"
-                                    + "procure uma agencia");
-                            menu();
-                        }
-
-                }
-            case 2:
-
-                System.out.println("Deseja ser cadastrasdo como Cliente\n 1 - sim\n 2- Não ");
-                aceite = entrada.nextInt();
-
-                if (aceite != 1) {
-
-                    menu();
-
-                } else {
-
-                    System.out.println("Quantas clientes deseja cadastrar?");
-                    int limit = entrada.nextInt();
-                    entrada.nextLine();
-
-                    
-
-                }
-
-        }
-
-    }
+//
+//    public static void menu() {
+//        Scanner entrada = new Scanner(System.in);
+//        ContaCorrente gestaoContas = new ContaCorrente();
+//
+//        int opcao;
+//        int novaOpcao;
+//        int cpf;
+//        int aceite;
+//        System.out.println("o você já é cliente ?\n 1-Sim\n 2-Não ");
+//        opcao = entrada.nextInt();
+//
+//        switch (opcao) {
+//
+//            case 1:
+//                System.out.println(" O que deja fazer?\n "
+//                        + "1- Sacar\n "
+//                        + "2- depositar\n "
+//                        + "3- consultar saldo\n "
+//                        + "4- consultar limite");
+//                novaOpcao = entrada.nextInt();
+//
+//                switch (novaOpcao) {
+//
+//                    case 1:
+//
+//                        System.out.println(" Informe seu CPF ?");
+//                        cpf = entrada.nextInt();
+//                        if (gestaoContas.ConsularCpf(cpf) != 0) {
+//                            System.out.println(" Qual valor você deseja sacar ?");
+//                            float valorSaque = entrada.nextFloat();
+//                            gestaoContas.sacar(valorSaque);
+//                        } else {
+//                            System.out.println("Não foi possivel verificar seu Cpf,"
+//                                    + "procure uma agencia");
+//                            menu();
+//                        }
+//
+//                        break;
+//
+//                    case 2:
+//
+//                        System.out.println(" Informe seu CPF ?");
+//                        cpf = entrada.nextInt();
+//                        if (gestaoContas.ConsularCpf(cpf) != 0) {
+//                            System.out.println(" Qual valor você deseja depositar?");
+//                            float valorDeposito = entrada.nextFloat();
+//                            gestaoContas.creditar(valorDeposito);
+//                        } else {
+//                            System.out.println("Não foi possivel verificar seu Cpf,"
+//                                    + "procure uma agencia");
+//                            menu();
+//                        }
+//                        break;
+//
+//                    case 3:
+//                        System.out.println(" Informe seu CPF ?");
+//                        cpf = entrada.nextInt();
+//                        if (gestaoContas.ConsularCpf(cpf) != 0) {
+//                            gestaoContas.verificarSaldo();
+//                        } else {
+//                            System.out.println("Não foi possivel verificar seu Cpf,"
+//                                    + "procure uma agencia");
+//                            menu();
+//                        }
+//                    case 4:
+//                        System.out.println(" Informe seu CPF ?");
+//                        cpf = entrada.nextInt();
+//                        if (gestaoContas.ConsularCpf(cpf) != 0) {
+//                            gestaoContas.verificarLimite();
+//                        } else {
+//                            System.out.println("Não foi possivel verificar seu Cpf,"
+//                                    + "procure uma agencia");
+//                            menu();
+//                        }
+//
+//                }
+//            case 2:
+//
+//                System.out.println("Deseja ser cadastrasdo como Cliente\n 1 - sim\n 2- Não ");
+//                aceite = entrada.nextInt();
+//
+//                if (aceite != 1) {
+//
+//                    menu();
+//
+//                } else {
+//
+//                    System.out.println("Quantas clientes deseja cadastrar?");
+//                    int limit = entrada.nextInt();
+//                    entrada.nextLine();
+//
+//                    
+//
+//                }
+//
+//        }
+//
+//    }
 }
 
 // public static void CadastrarContaCliente() {
