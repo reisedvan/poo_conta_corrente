@@ -1,38 +1,86 @@
-package br.com.bancos;
+package br.com.bancos.main;
 
 import br.com.bancos.domain.Cliente;
 import br.com.bancos.service.ClienteService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     private static ClienteService clienteService = new ClienteService();
 
     public static void main(String[] args) {
-        String nome = "";
+        menu();
+        Cliente cliente = new Cliente();
         
-        
-        Cliente cliente = new Cliente(nome, "Reis", "Rua a, num 2", 1999, 12, 13, "M", "000.000.000-00", 2);
-       
-        clienteService.cadastrarCliente(cliente);
 
-        clienteService.listarClientes();
     }
 
-//
-//    public static void menu() {
-//        Scanner entrada = new Scanner(System.in);
-//        ContaCorrente gestaoContas = new ContaCorrente();
-//
-//        int opcao;
-//        int novaOpcao;
-//        int cpf;
-//        int aceite;
-//        System.out.println("o você já é cliente ?\n 1-Sim\n 2-Não ");
-//        opcao = entrada.nextInt();
-//
-//        switch (opcao) {
+    public static void menu() {
+        Scanner entrada = new Scanner(System.in);
+        int opcao;
+
+        System.out.println("Quantos clientes Você seja cadastrar ?");
+        int quantidadeCliente = entrada.nextInt();
+        entrada.nextLine();
+
+        for (int i = 0; i < quantidadeCliente;) {
+
+            System.out.println("Insira o nome do Cliente");
+            String nome = entrada.nextLine();
+            System.out.println("Entre com o Sobrenome ");
+            String sobrenome = entrada.nextLine();
+            System.out.println("Entre com o endereço ");
+            String endereco = entrada.nextLine();
+            System.out.println("Entre com o ano de aniversario ");
+            int anoAniversario = entrada.nextInt();
+            entrada.nextLine();
+            System.out.println("Entre com o mês do Aniversario ");
+            int mesAniversario = entrada.nextInt();
+            entrada.nextLine();
+            System.out.println("Entre com o dia de aniversario ");
+            int diaAniversario = entrada.nextInt();
+            entrada.nextLine();
+            System.out.println("Qual o sexo do Cliente");
+            String sexo = entrada.nextLine();
+            System.out.println("Insira o CPF do Cliente");
+            String documento = entrada.nextLine();
+            System.out.println("Insira a renda Bruta do Cliente");
+            float rendaBruta = entrada.nextFloat();
+            entrada.nextLine();
+
+            Cliente cliente = new Cliente(
+                    nome,
+                    sobrenome,
+                    endereco,
+                    anoAniversario,
+                    mesAniversario,
+                    diaAniversario,
+                    sexo,
+                    documento,
+                    rendaBruta);
+
+            clienteService.cadastrarCliente(cliente);
+
+            i++;
+
+            if (i == quantidadeCliente) {
+                System.out.println("Deseja cadastrar novo Cliente 1 - sim e 2 - não");
+                opcao = entrada.nextInt();
+
+                if (opcao == 1) {
+                    i--;
+                }
+
+            }
+
+        }
+        clienteService.listarClientes();
+    }
+}
+
+//       switch (opcao) {
 //
 //            case 1:
 //                System.out.println(" O que deja fazer?\n "
@@ -119,8 +167,6 @@ public class Main {
 //        }
 //
 //    }
-}
-
 // public static void CadastrarContaCliente() {
 //
 //        Scanner entrada = new Scanner(System.in);

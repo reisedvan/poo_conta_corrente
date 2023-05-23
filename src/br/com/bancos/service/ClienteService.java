@@ -19,7 +19,7 @@ public class ClienteService {
 
     public void listarClientes() {
         for (Cliente cliente : lista) {
-            System.out.println("Nome: " + cliente.getNome() + " Id: " + cliente.getId());
+            System.out.println(" Id: " + cliente.getId() + "  Nome: " + cliente.getNome() + "  Limite = " + cliente.consultarLimite());
         }
     }
 
