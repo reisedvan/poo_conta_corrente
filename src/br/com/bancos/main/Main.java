@@ -18,11 +18,13 @@ public class Main {
         clienteService.cadastrarCliente(new Cliente("Edvan3", "Reis3", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
         clienteService.cadastrarCliente(new Cliente("Edvan4", "Reis4", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
         clienteService.cadastrarCliente(new Cliente("Edvan5", "Reis5", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
-        
+
         clienteService.findfById(2);
         clienteService.deleteClienteId(1);
-//        clienteService.listarClientes();
+//        clienteService.updateCostumer(0);
+        clienteService.findCostumerLimit().getNome();
 
+        clienteService.listarClientes();
     }
 
     public static void menu() {
