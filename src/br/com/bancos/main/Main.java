@@ -8,23 +8,58 @@ import java.util.Scanner;
 
 public class Main {
 
+    static Scanner entrada = new Scanner(System.in);
     private static ClienteService clienteService = new ClienteService();
 
     public static void main(String[] args) {
 //        menu();
         Cliente cliente = new Cliente();
-        clienteService.cadastrarCliente(new Cliente("Edvan1", "Reis1", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
-        clienteService.cadastrarCliente(new Cliente("Edvan2", "Reis2", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
-        clienteService.cadastrarCliente(new Cliente("Edvan3", "Reis3", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
-        clienteService.cadastrarCliente(new Cliente("Edvan4", "Reis4", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
-        clienteService.cadastrarCliente(new Cliente("Edvan5", "Reis5", "Rua A", 1999, 12, 13, "M", "ABC123", 1000));
+        clienteService.cadastrarCliente(new Cliente("Edvan1", "Reis1", "Rua A", 1999, 12, 13, "M", "ABC1231", 1000));
+        clienteService.cadastrarCliente(new Cliente("Edvan2", "Reis2", "Rua A", 1999, 12, 13, "M", "ABC1232", 1000));
+        clienteService.cadastrarCliente(new Cliente("Edvan3", "Reis3", "Rua A", 1999, 12, 13, "M", "ABC1233", 1000));
+        clienteService.cadastrarCliente(new Cliente("Edvan4", "Reis4", "Rua A", 1999, 12, 13, "M", "ABC1234", 1000));
+        clienteService.cadastrarCliente(new Cliente("Edvan5", "Reis5", "Rua A", 1999, 12, 13, "M", "ABC1235", 1000));
 
-        clienteService.findfById(2);
-        clienteService.deleteClienteId(1);
-//        clienteService.updateCostumer(0);
-        clienteService.findCostumerLimit().getNome();
+        cliente = clienteService.findfByDocument("ABC1231");
+        if (cliente == null) {
+            System.out.println("Cliente não encontrado");
+        } else {
+            System.out.println(" Nome: " + cliente.getNome() + " Sobrenome: " + cliente.getSobrenome());
+        }
+
+        //clienteService.deleteClienteId(cliente.getId());
+        //clienteService.updateCostumer();
+        //clienteService.findCostumerLimit().getNome();
+        clienteService.listarClientes();
+
+        updateCustomer();
 
         clienteService.listarClientes();
+    }
+
+    public static void updateCustomer() {
+
+        System.out.println("Insira o CPF do Cliente");
+        String documento = entrada.nextLine();
+        if (clienteService.existsByDocument(documento)) {
+            long id = clienteService.findfByDocument(documento).getId();
+
+            System.out.println("Entre com o endereço ");
+            String endereco = entrada.nextLine();
+            System.out.println("Insira a renda Bruta do Cliente");
+            float rendaBruta = entrada.nextFloat();
+            entrada.nextLine();
+
+            Cliente cliente = new Cliente(endereco, rendaBruta);
+
+            cliente.setId(id);
+
+            clienteService.updateCostumer(cliente);
+
+        } else {
+            System.err.println("Cliente não encontrado");
+
+        }
     }
 
     public static void menu() {

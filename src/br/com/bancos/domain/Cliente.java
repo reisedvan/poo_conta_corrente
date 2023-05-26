@@ -22,6 +22,13 @@ public class Cliente {
 
     }
 
+    public Cliente(String endereço, float rendaBruta) {
+
+        this.endereço = endereço;
+        this.rendaBruta = rendaBruta;
+
+    }
+
     public Cliente(String nome, String sobrenome, String endereço, int anoAniversario, int mesAniversario,
             int diaAniversario, String sexo, String documento, float rendaBruta) {
 
@@ -133,6 +140,7 @@ public class Cliente {
 
     public void setRendaBruta(float rendaBruta) {
         this.rendaBruta = rendaBruta;
+        atualizarLimite();
     }
 
     public float getRendaBruta() {
@@ -151,9 +159,9 @@ public class Cliente {
         return contaCorrente.sacar(valorSaque);
     }
 
-    public boolean depositar() {
+    public boolean depositar(float valorDeposito) {
 
-        return contaCorrente.creditar(rendaBruta);
+        return contaCorrente.creditar(valorDeposito);
     }
 
     public float consultarLimite() {
@@ -164,6 +172,12 @@ public class Cliente {
     public float consultarSaldo() {
 
         return contaCorrente.verificarSaldo();
+    }
+
+    public boolean atualizarLimite() {
+
+        return contaCorrente.cadastrarLimite(rendaBruta);
+
     }
 
 }

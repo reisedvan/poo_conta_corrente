@@ -8,8 +8,6 @@ import java.util.Scanner;
 //Gerenciador de clientes
 public class ClienteService {
 
-    Scanner entrada = new Scanner(System.in);
-
     private List<Cliente> lista = new ArrayList();
     private Cliente Cliente;
 
@@ -21,6 +19,11 @@ public class ClienteService {
         return cliente;
     }
 
+    public boolean existsByDocument(String documento) {
+
+        return findfByDocument(documento) != null;
+    }
+
     public void listarClientes() {
         for (Cliente cliente : lista) {
             System.out.println(" Id: " + cliente.getId() + "  Nome: " + cliente.getNome() + "  Limite = " + cliente.consultarLimite());
@@ -30,6 +33,16 @@ public class ClienteService {
     public Cliente findfById(long id) {
         for (Cliente cliente : lista) {
             if (cliente.getId() == id) {
+                return cliente;
+
+            }
+        }
+        return null;
+    }
+
+    public Cliente findfByDocument(String documento) {
+        for (Cliente cliente : lista) {
+            if (cliente.getDocumento().equals(documento)) {
                 return cliente;
 
             }
@@ -61,42 +74,12 @@ public class ClienteService {
 
     }
 
-    public Cliente updateCostumer(long id) {
+    public Cliente updateCostumer(Cliente atualizadoCliente) {
         for (Cliente cliente : lista) {
-            if (cliente.getId() == id) {
+            if (cliente.getId() == atualizadoCliente.getId()) {
 
-                System.out.println("Insira o nome do Cliente");
-                String nome = entrada.nextLine();
-                cliente.setNome(nome);
-                System.out.println("Entre com o Sobrenome ");
-                String sobrenome = entrada.nextLine();
-                cliente.setSobrenome(sobrenome);
-                System.out.println("Entre com o endereço ");
-                String endereco = entrada.nextLine();
-                cliente.setEndereço(endereco);
-                System.out.println("Entre com o ano de aniversario ");
-                int anoAniversario = entrada.nextInt();
-                entrada.nextLine();
-                cliente.setAnoAniversario(anoAniversario);
-                System.out.println("Entre com o mês do Aniversario ");
-                int mesAniversario = entrada.nextInt();
-                entrada.nextLine();
-                cliente.setMesAniversario(mesAniversario);
-                System.out.println("Entre com o dia de aniversario ");
-                int diaAniversario = entrada.nextInt();
-                entrada.nextLine();
-                cliente.setDiaAniversario(diaAniversario);
-                System.out.println("Qual o sexo do Cliente");
-                String sexo = entrada.nextLine();
-                cliente.setSexo(sexo);
-                System.out.println("Insira o CPF do Cliente");
-                String documento = entrada.nextLine();
-                cliente.setDocumento(documento);
-                System.out.println("Insira a renda Bruta do Cliente");
-                float rendaBruta = entrada.nextFloat();
-                entrada.nextLine();
-                cliente.setRendaBruta(rendaBruta);
-                lista.add(cliente);
+                cliente.setEndereço(atualizadoCliente.getEndereço());
+                cliente.setRendaBruta(atualizadoCliente.getRendaBruta());
 
             }
             return cliente;

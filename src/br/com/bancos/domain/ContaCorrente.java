@@ -16,6 +16,7 @@ public class ContaCorrente {
 
     public boolean cadastrarLimite(float rendaBruta) {
         if (rendaBruta <= 0) {
+            limite = 0;
             return false;
         }
         limite = (float) (rendaBruta * 0.30);
