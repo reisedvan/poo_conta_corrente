@@ -12,7 +12,7 @@ public class ClienteService {
     private Cliente Cliente;
 
     public Cliente cadastrarCliente(Cliente cliente) {
-        if (cliente.validarIdade()) {
+        if (cliente.ValidarIdade()) {
             cliente.setId(lista.size());
             lista.add(cliente);
         }
